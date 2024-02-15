@@ -25,6 +25,7 @@ requirements:
     - setuptools >=64.0.0
   run:
     - distro
+    - liblsl
     - mne-base >=1.4.2
     - numpy >=1.21
     - packaging
