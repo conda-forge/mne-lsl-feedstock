@@ -22,7 +22,7 @@ requirements:
     - python >=3.9
     - setuptools >=64.0.0
   run:
-    - click >= 8.1
+    - click >=8.1
     - distro
     - liblsl
     - mne-base >=1.4.2
