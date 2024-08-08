@@ -14,9 +14,7 @@ build:
   script: {{ PYTHON }} -m pip install . -vv
   number: 0
   entry_points:
-    - mne_lsl-sys_info = mne_lsl.commands.sys_info:run
-    - mne_lsl_player = mne_lsl.commands.mne_lsl_player:run
-    - mne_lsl_stream_viewer = mne_lsl.commands.mne_lsl_stream_viewer:run
+    - mne-lsl = mne_lsl.commands.main:run
 
 requirements:
   host:
@@ -24,6 +22,7 @@ requirements:
     - python >=3.9
     - setuptools >=64.0.0
   run:
+    - click >= 8.1
     - distro
     - liblsl
     - mne-base >=1.4.2
@@ -42,7 +41,7 @@ test:
     - mne_lsl
   commands:
     - pip check
-    - mne_lsl-sys_info
+    - mne-lsl sys-info
   requires:
     - pip
 
