@@ -1,5 +1,5 @@
 {% set name = "mne-lsl" %}
-{% set version = "1.6.1" %}
+{% set version = "1.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/mne_lsl-{{ version }}.tar.gz
-  sha256: 05174501562218ed974ce26e850efae6a02225b70890ecd7625039e30b8d5cc5
+  sha256: 3192340f0b1bd56cb9f5a326245131a142bbf662c202b18da740d4add1d382a8
 
 build:
   noarch: python
@@ -17,23 +17,27 @@ build:
     - mne-lsl = mne_lsl.commands.main:run
 
 requirements:
+  build:
+    - {{ stdlib('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - make  # [linux]
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
   host:
     - pip
-    - python >=3.9
+    - python >=3.10
     - setuptools >=64.0.0
   run:
     - click >=8.1
-    - distro
-    - liblsl
     - mne-base >=1.4.2
     - numpy >=1.21
     - packaging
     - pooch
     - psutil
     - pyqtgraph
-    - python >=3.9
+    - python >=3.10
     - qtpy
-    - requests
     - scipy
 
 test:
@@ -50,7 +54,9 @@ about:
   summary: Real-time framework integrated with MNE-Python for online neuroscience research through LSL-compatible devices.
   license: BSD-3-Clause
   license_family: BSD
-  license_file: LICENSE
+  license_file:
+    - LICENSE
+    - src/liblsl/LICENSE
   doc_url: https://mne.tools/mne-lsl
   dev_url: https://github.com/mne-tools/mne-lsl
 
