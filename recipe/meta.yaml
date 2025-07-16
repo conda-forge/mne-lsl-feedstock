@@ -1,5 +1,5 @@
 {% set name = "mne-lsl" %}
-{% set version = "1.9.0" %}
+{% set version = "1.10.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/mne_lsl-{{ version }}.tar.gz
-  sha256: 27cdea4a241c3525bca076d69057e00092bfb419e7619ccd4ed41470b7f5261e
+  sha256: 5c179aaec6ab9207179393acdd48c345a556e83598c392626e64437a697995cf
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [py<310]
   entry_points:
