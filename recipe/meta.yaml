@@ -14,7 +14,7 @@ build:
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [py<310]
   entry_points:
-    - mne-lsl = mne_lsl.commands.main:run
+    - mne-lsl = mne_lsl._commands.main:run
 
 requirements:
   build:
