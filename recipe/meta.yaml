@@ -39,6 +39,7 @@ requirements:
     - python
     - qtpy
     - scipy
+    - tomli
 
 test:
   imports:
