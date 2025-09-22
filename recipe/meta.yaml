@@ -1,5 +1,5 @@
 {% set name = "mne-lsl" %}
-{% set version = "1.10.1" %}
+{% set version = "1.11.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,14 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/mne_lsl-{{ version }}.tar.gz
-  sha256: e14acb14ba7096044a324979d0ca3cf3fb853890911035ba7ebace87056f5858
+  sha256: 378bdbb322b35154c47cca58f0f3b366a1be4adfef8f2e2872b1af5d7552ee53
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [py<310]
   entry_points:
-    - mne-lsl = mne_lsl.commands.main:run
+    - mne-lsl = mne_lsl._commands.main:run
 
 requirements:
   build:
@@ -39,6 +39,7 @@ requirements:
     - python
     - qtpy
     - scipy
+    - tomli
 
 test:
   imports:
