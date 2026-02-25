@@ -1,5 +1,6 @@
 {% set name = "mne-lsl" %}
 {% set version = "1.13.0" %}
+{% set python_min = "3.11" %}
 
 package:
   name: {{ name|lower }}
@@ -30,7 +31,7 @@ requirements:
     - setuptools >=64.0.0
   run:
     - click >=8.1
-    - mne-base >=1.4.2
+    - mne-base >=1.6.0
     - numpy >=1.21
     - packaging
     - pooch
@@ -39,7 +40,6 @@ requirements:
     - python
     - qtpy
     - scipy
-    - tomli
 
 test:
   imports:
