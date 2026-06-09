@@ -10,7 +10,7 @@ source:
   sha256: 83bc9ae2dbec847bc7d88067ccadf9a7b8f7fc02d785fde033f8af3159f41841
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [py<311]
   entry_points:
@@ -46,7 +46,9 @@ test:
   commands:
     - pip check
     - mne-lsl sys-info
+    - python -c "import mne_lsl; assert mne_lsl.__version__ == '{{ version }}', mne_lsl.__version__"
   requires:
+    - python
     - pip
 
 about:
