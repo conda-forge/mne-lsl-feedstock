@@ -12,7 +12,7 @@ source:
 build:
   number: 1
   script: {{ PYTHON }} -m pip install . -vv --no-build-isolation --no-deps
-  skip: true  # [py<311]
+  skip: true  # [py<311 or (is_abi3 and not is_python_min)]
   entry_points:
     - mne-lsl = mne_lsl._commands.main:run
 
@@ -27,6 +27,7 @@ requirements:
   host:
     - pip
     - python
+    - python-abi3  # [is_abi3]
     - setuptools >=64.0.0
     - setuptools_scm >=7.0.0
   run:
