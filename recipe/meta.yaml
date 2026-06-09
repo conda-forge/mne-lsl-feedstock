@@ -11,7 +11,7 @@ source:
 
 build:
   number: 1
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-build-isolation --no-deps
   skip: true  # [py<311]
   entry_points:
     - mne-lsl = mne_lsl._commands.main:run
@@ -28,6 +28,7 @@ requirements:
     - pip
     - python
     - setuptools >=64.0.0
+    - setuptools_scm >=7.0.0
   run:
     - click >=8.1
     - mne-base >=1.6.0
