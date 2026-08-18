@@ -1,17 +1,17 @@
 {% set name = "mne-lsl" %}
-{% set version = "1.13.2" %}
+{% set version = "1.14.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/mne_lsl-{{ version }}.tar.gz
-  sha256: 83bc9ae2dbec847bc7d88067ccadf9a7b8f7fc02d785fde033f8af3159f41841
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/mne_lsl-{{ version }}.tar.gz
+  sha256: e2ef6a6ee9556a1f93d7e6be52e625cc27e44d06a42a711e6516e18a80d0162b
 
 build:
-  number: 2
-  python_version_independent: true   # [is_abi3]
+  number: 0
+  python_version_independent: true  # [is_abi3]
   script: {{ PYTHON }} -m pip install . -vv --no-build-isolation --no-deps
   skip: true  # [py<311 or (is_abi3 and py!=311)]
   entry_points:
