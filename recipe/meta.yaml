@@ -8,11 +8,24 @@ package:
 source:
   url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/mne_lsl-{{ version }}.tar.gz
   sha256: e2ef6a6ee9556a1f93d7e6be52e625cc27e44d06a42a711e6516e18a80d0162b
+  # HOTFIX for 1.14.0: setup.py builds liblsl with a hardcoded cmake command which
+  # ignores $CMAKE_ARGS, hence neither the conda toolchain overrides nor the
+  # -DLSL_FETCH_PUGIXML=OFF below reach that build. The missing toolchain overrides
+  # break macOS, where CMAKE_CXX_COMPILER_AR (an llvm-ar which is not shipped next to
+  # the conda clang) is used to create the LTO static archive of the fetched pugixml.
+  # Fixed upstream in 1.14.1, drop the patch when updating to it.
+  patches:
+    - 0001-honor-CMAKE_ARGS-in-the-liblsl-build.patch
 
 build:
   number: 0
   python_version_independent: true  # [is_abi3]
-  script: {{ PYTHON }} -m pip install . -vv --no-build-isolation --no-deps
+  # link liblsl against the conda-forge pugixml instead of the copy which it fetches
+  # from GitHub at build time
+  script:
+    - export CMAKE_ARGS="${CMAKE_ARGS} -DLSL_FETCH_PUGIXML=OFF"  # [unix]
+    - set "CMAKE_ARGS=%CMAKE_ARGS% -DLSL_FETCH_PUGIXML=OFF"  # [win]
+    - {{ PYTHON }} -m pip install . -vv --no-build-isolation --no-deps
   skip: true  # [py<311 or (is_abi3 and py!=311)]
   entry_points:
     - mne-lsl = mne_lsl._commands.main:run
@@ -27,6 +40,7 @@ requirements:
     - make
   host:
     - pip
+    - pugixml
     - python
     - python-abi3  # [is_abi3]
     - setuptools >=64.0.0
