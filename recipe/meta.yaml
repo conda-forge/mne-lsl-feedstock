@@ -1,5 +1,5 @@
 {% set name = "mne-lsl" %}
-{% set version = "1.14.0" %}
+{% set version = "1.15.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/mne_lsl-{{ version }}.tar.gz
-  sha256: e2ef6a6ee9556a1f93d7e6be52e625cc27e44d06a42a711e6516e18a80d0162b
+  sha256: af839b6a78ebd6216c899cc6e696607926f91231a1ba27367a8b9c70637c47fb
   # HOTFIX for 1.14.0: setup.py builds liblsl with a hardcoded cmake command which
   # ignores $CMAKE_ARGS, hence neither the conda toolchain overrides nor the
   # -DLSL_FETCH_PUGIXML=OFF below reach that build. The missing toolchain overrides
