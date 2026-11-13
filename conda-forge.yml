@@ -5,10 +5,6 @@ build_platform:
 conda_build:
   error_overlinking: true
 conda_forge_output_validation: true
-linter:
-  skip:
-    # liblsl is a plain C++ library loaded via ctypes, not a CPython extension
-    - hint_abi3_missing_abi3audit
 github:
   branch_name: main
   tooling_branch_name: main
